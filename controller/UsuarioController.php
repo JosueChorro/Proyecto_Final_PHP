@@ -5,6 +5,7 @@
     - Este recibe peticiones 
     - Manda la información al modelo para procesarla
     - Carga las vistas como respuesta al usuario
+    comentario de prueba
 */
 
 class UsuarioController{
