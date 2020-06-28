@@ -30,7 +30,9 @@
     
             //iniciar la sesión o retornar al login
             $this->model->GenerarSesion($usuario);              
+           
         } 
+       
     }
 
 

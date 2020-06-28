@@ -5,44 +5,33 @@ session_start();
 //para las conexiones a la base de datos
 require_once 'model/Conexion.php';  
 
-    //el valor que coloquemos aquí será el primer controlador
-    //que se llame cuando cargue el proyecto
   $controller = 'Login';
 
-  // Toda esta lógica hará el papel de un FrontController
-  //comprobamos si la c "controlador" está vacía
   if(!isset($_REQUEST['c']))
   {
-      //si el parámetro no ha sido definido cargará LoginController.php
+  
       require_once 'controller/'.$controller.'Controller.php';
 
-      //Da un formato igual al nombre de la clase controlador
+    
       $controller = $controller.'Controller'; //LoginController
 
-      //instanciar la clase LoginController
       $controller = new $controller;
 
-      //llamamos el método Index() del controlador
-      //este método debe construir y lanzar la vista que queremos 
-      //a penas cargue el proyecto
       $controller->Index();    
   }
-  else // si la c "controlador" tiene valor
+  else 
   {
-    //Obtenemos el controlador decodificado que queremos cargar 
     $controller = base64_decode($_REQUEST['c']);
 
-    //verificamos si se envía también una a "acción/método" y de decodifica
-    //si no se envía entonces la acción que se tomará será Index
     $accion = isset($_REQUEST['a']) ? base64_decode($_REQUEST['a']) : 'Index';
     
-    //incluimos el controlador
+    
     require_once 'controller/'.$controller.'Controller.php';
 
-    //Da un formato igual al nombre de la clase del controlador enviado
+ 
     $controller = $controller.'Controller'; //UsuarioController
 
-    //instanciar la clase controlador UsuarioController
+   
     $controller = new $controller;
     
     //esta función llama el nombre del controlador y la acción solicitadas
