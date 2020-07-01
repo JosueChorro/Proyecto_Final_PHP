@@ -49,7 +49,7 @@ class ClienteController{
         $this->model->email = $_REQUEST["email"];
         $this->model->sexo = $_REQUEST["sexo"];
         $fechanacimiento = date_create($_REQUEST["fechanacimiento"]);
-        $this->model->fechanacimiento = date_format($fechanacimiento, 'Y-m-d');
+        $this->model->fechanacimiento = date_format($fechanacimiento, 'd-m-Y');
         $this->model->idusuarioregistro = $_SESSION["id"];
 
         //guardar el cliente
@@ -89,7 +89,7 @@ class ClienteController{
         $this->model->email = $_REQUEST["email"];
         $this->model->sexo = $_REQUEST["sexo"];
         $fechanacimiento = date_create($_REQUEST["fechanacimiento"]);
-        $this->model->fechanacimiento = date_format($fechanacimiento, 'Y-m-d');
+        $this->model->fechanacimiento = date_format($fechanacimiento, 'd-m-Y');
 
         //actualizar el cliente
         $this->model->ActualizarCliente($this->model);

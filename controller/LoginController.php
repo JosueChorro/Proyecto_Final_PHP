@@ -31,9 +31,16 @@
             //iniciar la sesión o retornar al login
             $this->model->GenerarSesion($usuario);              
            
-        } 
+        }
+        public function Salir(){
+            $usuario = new Usuario();
+            //iniciar la sesión o retornar al login
+            $this->model->SalirSesion($usuario);              
+        }
        
     }
+
+   
 
 
 ?>

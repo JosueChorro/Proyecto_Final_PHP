@@ -55,11 +55,11 @@ class Usuario //inicio clase
              die($t->getMessage());
          }          
      }
-     public function ListarUsuarioActivos()
+     public function ListarUsuariosActivos()
      {
          try
          {
-             $stm = $this->pdo->prepare("SELECT u.idusuario AS idusuario, u.nombre as nombre, u.apellido AS apellido, u.telefono
+             $stm = $this->pdo->prepare("SELECT u.idusuario AS idusuario, u.nombre, u.apellido AS apellido, u.telefono
              AS telefono, u.email AS email, tp.nombre AS tipo FROM usuario AS u INNER JOIN tipousuario AS tp ON u.idtipousuario =
              tp.idtipousuario WHERE u.estado = 1");
              $stm->execute();
@@ -71,7 +71,7 @@ class Usuario //inicio clase
              die($t->getMessage());
          }
      }
-     public function ListarUsuarioInactivos()
+     public function ListarUsuariosInactivos()
      {
         try
         {
@@ -92,11 +92,11 @@ class Usuario //inicio clase
          try
          {
               $stm = $this->pdo 
-                           ->prepare("SELECT u.idusario AS idusuario, u.nombre AS nombre, u,apeliido, u.telefono
-                           AS telefono, u.email, u.email, u.idtipousuario, tp.nombre AS tipo, u.clave AS clave, u.idpreguntasecreta AS
-                           idpreguntasecreta, u.respuestasecreta AS respuestasecreta, ps.nombre AS pregunta FROM usuario AS u INNER JOIN 
-                           tipousuario AS tp ON u.idtipousuario = tp.idtipousuario INNER JOIN preguntasecreta AS ps ON u.idpreguntasecreta = 
-                           ps.idpreguntasecreta WHERE u.idusuario = ?"); 
+                 ->prepare("SELECT u.idusuario AS idusuario, u.nombre AS nombre, u.apellido, u.telefono
+        AS telefono, u.email, u.email, u.idtipousuario, tp.nombre AS tipo, u.clave AS clave, u.idpreguntasecreta AS
+         idpreguntasecreta, u.respuestasecreta AS respuestasecreta, ps.nombre AS pregunta FROM usuario AS u INNER JOIN 
+         tipousuario AS tp ON u.idtipousuario = tp.idtipousuario INNER JOIN preguntasecreta AS ps ON u.idpreguntasecreta = 
+                     ps.idpreguntasecreta WHERE u.idusuario = ?"); 
               $stm->execute(array($id));
 
               return $stm->fetch(PDO::FETCH_OBJ);
@@ -224,7 +224,7 @@ class Usuario //inicio clase
                  $_SESSION["id"] = $data->idusuario;
                  $_SESSION["nombre"] = $data->nombre;
                  $_SESSION["apellido"] = $data->apellido;
-                 $_SESSION["email"] = $data->email;
+                 $_SESSION["enail"] = $data->email;
 
                  if ($data->idtipousuario == 1) {
                      #entrar como encargado de inventario
@@ -242,6 +242,19 @@ class Usuario //inicio clase
                 die($t->getMessage());             
             }  
      }
+     public function SalirSesion($data)
+     {
+         try
+         {
+            if ($data != null) {
+                #tomar los valores es variables de sesion
+                header("Location: ?c=".base64_encode('Login'));                     
+            }
+         }catch (Throwable $t)
+         { 
+             die($t->getMessage());             
+         }
+        }
 } //fin clase
 
 ?>

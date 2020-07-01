@@ -13,39 +13,38 @@ class Cliente
     public $idusuarioregistro;
     public $estado;
 
-    public function _CONSTRUCT()
-        {
-            try
-            {
-                $this->pdo = Conexion::Conectar();
-            }
-            catch (Throwable $t)
-            {
-                die($t->getMessage());
-            }
-        }
-
-    public function RegistrarCliente($data)
+    public function __CONSTRUCT()
     {
         try
         {
-            $sql = "INSERT INTO cliente(nombre, apellido, telefono, direccion, email, sexo,
-            fechanacimiento, idusuarioregistro)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?,)";
+            $this->pdo = Conexion::Conectar();
+        }
+        catch (Throwable $t)
+        {
+            die($t->getMessage());
+        }
+    }
+public function RegistrarCliente($data)
+{
+    try
+    {
+        $sql = "INSERT INTO cliente (nombre, apellido, telefono, direccion, email, sexo,
+        fechanacimiento, idusuario)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
-            $this->pdo->prepare($sql)
-            ->execute(
-                array(
-                    $data->nombre,
-                    $data->apellido,
-                    $data->telefono,
-                    $data->direccion,
-                    $data->email,
-                    $data->sexo,
-                    $data->fechanacimiento,
-                    $data->idusuarioregistro,
-                )
-                );
+        $this->pdo->prepare($sql)
+        ->execute(
+            array(
+                $data->nombre,
+                $data->apellido,
+                $data->telefono,
+                $data->direccion,
+                $data->email,
+                $data->sexo,
+                $data->fechanacimiento,
+                $data->idusuarioregistro
+            )
+            );
 
         }
         catch (Throwable $t)
@@ -54,18 +53,18 @@ class Cliente
         }
     }
 
-    public function ListarClienteActivos()
+    public function ListarClientesActivos()
     {
         try
         {
             $stm = $this->pdo->prepare("SELECT c.idcliente AS idcliente, c.nombre AS nombre, c.apellido AS apellido,
-            c.telefono AS telefono, c.direccion as direccion, c.email AS email, c.sexo AS sexo, DATE_FORMAT (c.fechanacimiento, %d-%m-%y) AS fechanacimiento, TIMESTAMPDIFF(YEAR, c.fechanamiento, CURDATE()) AS edad,
-            c.idusuarioregistro AS idusuarioregistro, u.apellido as registradopor FROM cliente AS c INNER JOIN usuario AS u ON c.idusuarioregistro = u.idusuario WHERE c.estado = 1");
+            c.telefono AS telefono, c.direccion as direccion, c.email AS email, c.sexo AS sexo, DATE_FORMAT(c.fechanacimiento, '%d-%m-%Y') AS fechanacimiento, TIMESTAMPDIFF(YEAR, c.fechanacimiento,CURDATE()) AS edad,
+            c.idusuario AS idusuarioregistro, u.apellido as registradopor FROM cliente AS c INNER JOIN usuario AS u ON c.idusuario = u.idusuario WHERE c.estado = 1");
             $stm->execute();
 
-            return $stm->fechAll(PDO::FETCH_OBJ);
+            return $stm->fetchAll(PDO::FETCH_OBJ);
         }
-        catch (Throwable$t)
+        catch (Throwable $t)
         {
             die($t->getMessage());
         }
@@ -76,14 +75,14 @@ class Cliente
         try
         {
             $stm = $this->pdo->prepare("SELECT c.idcliente AS idcliente, c.nombre AS nombre, c.apellido AS apellido,
-            c.telefono AS telefono, c.direccion as direccion, c.email AS email, c.sexo AS sexo, DATE_FORMAT (c.fechanacimiento, %d-%m-%y) AS fechanacimiento, TIMESTAMPDIFF(YEAR, c.fechanamiento, CURDATE()) AS edad,
-            c.idusuarioregistro AS idusuarioregistro, u.apellido as registradopor FROM cliente AS c INNER JOIN usuario AS u ON c.idusuarioregistro = u.idusuario WHERE c.estado = 0");
+            c.telefono AS telefono, c.direccion as direccion, c.email AS email, c.sexo AS sexo, DATE_FORMAT(c.fechanacimiento, '%d-%m-%Y') AS fechanacimiento, TIMESTAMPDIFF(YEAR, c.fechanacimiento,CURDATE()) AS edad,
+            c.idusuario AS idusuarioregistro, u.apellido as registradopor FROM cliente AS c INNER JOIN usuario AS u ON c.idusuario = u.idusuario WHERE c.estado = 0");
 
           $stm->execute();
 
-          return $stm->fechAll(PDO::FETCH_OBJ);
+          return $stm->fetchAll(PDO::FETCH_OBJ);
         }
-        catch (Throwable$t)
+        catch (Throwable $t)
         {
             die($t->getMessage());
         }
@@ -94,12 +93,12 @@ class Cliente
         try
     {
         $stm = $this->pdo->prepare("SELECT c.idcliente AS idcliente, c.nombre AS nombre, c.apellido AS apellido,
-        c.telefono AS telefono, c.direccion as direccion, c.email AS email, c.sexo AS sexo, DATE_FORMAT (c.fechanacimiento, %d-%m-%y) AS fechanacimiento, TIMESTAMPDIFF(YEAR, c.fechanamiento, CURDATE()) AS edad,
+        c.telefono AS telefono, c.direccion as direccion, c.email AS email, c.sexo AS sexo, DATE_FORMAT (c.fechanacimiento, '%d-%m-%Y') AS fechanacimiento, TIMESTAMPDIFF(YEAR, c.fechanacimiento, CURDATE()) AS edad,
         c.idusuarioregistro AS idusuarioregistro, u.apellido as registradopor FROM cliente AS c INNER JOIN usuario AS u ON c.idusuarioregistro = u.idusuario WHERE idcliente = ?");
 
          $stm->execute(array($id));
 
-         return $stm->fechAll(PDO::FETCH_OBJ);
+         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
      catch (Throwable $t)
      {
@@ -131,7 +130,8 @@ class Cliente
                   $data->email,
                   $data->sexo,
                   $data->fechanacimiento,
-                  $data->idcliente )
+                  $data->idcliente
+              )
               );
             }
             catch (Throwable $t)
@@ -165,4 +165,4 @@ class Cliente
 
     }
 
-?>
+   ?>
