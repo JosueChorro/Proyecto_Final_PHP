@@ -1,3 +1,9 @@
+<?php
+  //validar la sesión
+  if(!isset($_SESSION["id"])){
+    header("Location: ?c=".base64_encode('Login'));
+  }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,18 +30,18 @@
         <li><a href="?c=<?php echo base64_encode('Usuario'); ?>">Usuario</a></li>
 
         <!-- Dropdown Trigger -->
-        <li><a class="dropdown-trigger btn naranja-ast tooltipped" data-position="bottom" data-tooltip="Usuario activo" href='#' data-target='dropdown1'><i class="material-icons">person_pin</i></a></li>
+        <li><a class="dropdown-trigger btn naranja-ast tooltipped" data-position="bottom" data-tooltip="<?php echo $_SESSION['nombre']. " ". $_SESSION['apellido']; ?>" href='#' data-target='dropdown1'><i class="material-icons">person_pin</i></a></li>
 
         <!-- Dropdown Structure -->
         <ul id='dropdown1' class='dropdown-content'>
           <li><a href="#" class="azul-ast white-text"><i class="material-icons white-text">menu</i>&nbsp;</a></li>
-          <li><a href="?c=<?php echo base64_encode('Login'); ?>&a=<?php echo base64_encode('Salir'); ?>" class="naranja-ast-text"><i class="material-icons">exit_to_app</i>Salir</li></a>
+          <li><a href="?c=<?php echo base64_encode('Login'); ?>" class="naranja-ast-text"><i class="material-icons">exit_to_app</i>Salir</a></li>
           
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaClave'); ?>" class="naranja-ast-text"><i class="material-icons">vpn_key</i>Nueva clave</a></li>
           
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaPregunta'); ?>" class="naranja-ast-text"><i class="material-icons">live_help</i>Nueva pregunta</a></li>
 
-          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarDatos'); ?>" class="naranja-ast-text"><i class="material-icons">assignment</i>Mis datos</a></li>
+          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarUsuario'); ?>&idusuario=<?php echo base64_encode($_SESSION["id"]); ?>" class="naranja-ast-text"><i class="material-icons">assignment</i>Mis datos</a></li>
         </ul>
       </ul>
 
@@ -54,13 +60,13 @@
         <ul id='dropdown2' class='dropdown-content'>
           <li><a href="#" class="azul-ast white-text"><i class="material-icons white-text">menu</i>MENÚ</a></li>
 
-          <li><a href="?c=<?php echo base64_encode('Login'); ?>&a=<?php echo base64_encode('Salir'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">exit_to_app</i>Salir</a></li>
+          <li><a href="?c=<?php echo base64_encode('Login'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">exit_to_app</i>Salir</a></li>
           
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaClave'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">vpn_key</i>Nueva clave</a></li>
           
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaPregunta'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">live_help</i>Nueva pregunta</a></li>
 
-          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarDatos'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">assignment</i>Mis datos</a></li>
+          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarUsuario'); ?>&idusuario=<?php echo base64_encode($_SESSION["id"]); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">assignment</i>Mis datos</a></li>
         </ul>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
