@@ -33,7 +33,7 @@ background: linear-gradient(90deg, rgba(52,24,97,1) 0%, rgba(52,24,97,1) 70%, rg
         <li><a href="?c=<?php echo base64_encode('Usuario'); ?>">Usuario</a></li>
 
         <!-- Dropdown Trigger -->
-        <li><a class="dropdown-trigger btn  tooltipped" style="background-color: #F06292;" data-position="bottom" data-tooltip="Usuario activo" href='#' data-target='dropdown1'><i class="material-icons">person_pin</i></a></li>
+        <li><a class="dropdown-trigger btn  tooltipped" style="background-color: #F06292;" data-position="bottom" data-tooltip="<?php echo $_SESSION['nombre']. " ". $_SESSION['apellido']; ?>" href='#' data-target='dropdown1'><i class="material-icons">person_pin</i></a></li>
 
         <!-- Dropdown Structure -->
         <ul id='dropdown1' class='dropdown-content'>
@@ -44,7 +44,7 @@ background: linear-gradient(90deg, rgba(52,24,97,1) 0%, rgba(52,24,97,1) 70%, rg
 
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaPregunta'); ?>" style="color: black;"><i class="material-icons">live_help</i>Nueva pregunta</a></li>
 
-          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarDatos'); ?>" style="color: black;"><i class="material-icons">assignment</i>Mis datos</a></li>
+          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarUsuario'); ?>&idusuario=<?php echo base64_encode($_SESSION["id"]); ?>" style="color: black;"><i class="material-icons">assignment</i>Mis datos</a></li>
         </ul>
       </ul>
 
@@ -68,8 +68,7 @@ background: linear-gradient(90deg, rgba(52,24,97,1) 0%, rgba(52,24,97,1) 70%, rg
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaClave'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">vpn_key</i>Nueva clave</a></li>
 
           <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('NuevaPregunta'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">live_help</i>Nueva pregunta</a></li>
-
-          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarDatos'); ?>" class="naranja-ast-text"><i class="material-icons naranja-ast-text">assignment</i>Mis datos</a></li>
+          <li><a href="?c=<?php echo base64_encode('Usuario'); ?>&a=<?php echo base64_encode('EditarUsuario'); ?>&idusuario=<?php echo base64_encode($_SESSION["id"]); ?>" style="color: black;"><i class="material-icons">assignment</i>Mis datos</a></li>
         </ul>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
